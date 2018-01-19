@@ -1,9 +1,14 @@
 # Bubble
 
-a simple JavaScript Framework
+
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]()
+[![npm (scoped)](https://img.shields.io/npm/v/@cycle/core.svg)]()
+[![Code Climate](https://img.shields.io/codeclimate/issues/github/me-and/mdf.svg)]()
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
+>a simple JavaScript Framework
+
 
 ![气泡](./bubble.jpg)
-
 ## About
 
 A JavaScript library by liqi.
