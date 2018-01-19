@@ -4,19 +4,16 @@
 
   if( typeof module === "object" && typeof module.exports === "object") {
     module.exports = global.document?
-       factory(global,true):
-       function(w) {
+       factory(global,true):function(w) {
          if(!w.document ) {
            throw new Error("bubble requires a window with document");
          }
          return factory( w );
        };
   } else {
-    factory(global)
+    factory(global);
   }
 
-}) (typeof window !== "undefined" ? window : this,function(window,noGlobal){
+}) (typeof window !== "undefined" ? window :this,function(window,noGlobal){
 
    "use strict";
-
-   

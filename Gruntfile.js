@@ -12,6 +12,7 @@ module.exports = function(grunt) {
         src: [
           'src/_intro.js',
           'src/main.js',
+          'src/format.js',
           'src/_outro.js'
         ],
         dest: 'dist/<%= pkg.name.replace(".js", "") %>.js'
@@ -39,6 +40,7 @@ module.exports = function(grunt) {
         globals: {
           console: true,
           module: true,
+          window:true,
           document: true
         },
         jshintrc: '.jshintrc'
