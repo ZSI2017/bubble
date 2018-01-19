@@ -12,4 +12,7 @@ Bubble.VERSION = '0.0.0';
 
 
 // Export to the root, which is probably `window`.
-root.Bubble = Bubble;
+if(!noGlobal) {
+  window.Bubble = window.be = Bubble;
+}
+return Bubble;
