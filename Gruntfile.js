@@ -13,6 +13,8 @@ module.exports = function(grunt) {
           'src/_intro.js',
           'src/main.js',
           'src/format.js',
+          'src/_typeof.js',
+          'src/_isNumeric.js',
           'src/_outro.js'
         ],
         dest: 'dist/<%= pkg.name.replace(".js", "") %>.js'
