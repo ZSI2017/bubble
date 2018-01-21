@@ -15,6 +15,8 @@ module.exports = function(grunt) {
           'src/format.js',
           'src/_typeof.js',
           'src/_isNumeric.js',
+          'src/_isNumber.js',
+          'src/_isDate.js',
           'src/_outro.js'
         ],
         dest: 'dist/<%= pkg.name.replace(".js", "") %>.js'
