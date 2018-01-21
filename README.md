@@ -15,6 +15,53 @@ A JavaScript library by liqi.
 
 See the [project homepage](http://ZSI2017.github.io/Bubble).
 
+## Usage (用法)
+
+#### 字符串模板
+```
+Bubble.format(
+   `字符串拼接的时候使用{0}，\
+     {1}自定义拼接字符串`,
+     "format",
+     "就可以"
+  )
+
+运行结果：
+    // 字符串拼接的时候使用format，就可以自定义拼接字符串`
+
+```
+
+#### 类数字判断
+```
+  Bubble.isNumeric("22")  // true；
+  Bubble.isNumeric(22)   // true;
+
+```
+
+#### 数字判断
+```
+   Bubble.isNumber(22)    // true
+   Bubble.isNumber("22")  // false
+```
+
+#### 日期类型判断
+```
+  Bubble.isDate()
+
+```
+
+#### 类型判断
+```
+  Bubble.type(22) === "number"  // true
+  Bubble.type("22") === "string"   // true
+  Bubble.type([])  === "array"     // true
+  Bubble.type(null)  === "null"    //true
+  ...
+
+
+```
+
+
 ## to do list
   - 移除grunt，选择其他打包工具
   - 常用javascript 方法封装
@@ -29,7 +76,7 @@ See the [project homepage](http://ZSI2017.github.io/Bubble).
 
 Using Bower:
 
-    bower install Bubble
+  <script src= "./dist/Bubble.js"></script>
 
 Or grab the [source](https://github.com/ZSI2017/Bubble/dist/Bubble.js) ([minified](https://github.com/ZSI2017/Bubble/dist/Bubble.min.js)).
 

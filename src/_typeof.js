@@ -1,9 +1,9 @@
 var class2type = {
-  "null":"Null",
+  "null":"null",
   "NaN":"NaN",
-  "undefined":"Undefined",
-  "[object global]":"Window",
-  "[objectDOMWindow]":"Window"
+  "undefined":"undefined",
+  "[object global]":"window",
+  "[objectDOMWindow]":"window"
 };
 
 "Boolean,Number,String,Function,Array,Date,RegExp,Window,Document,Arguments,NodeList".split(",").forEach(function(name,idx){
