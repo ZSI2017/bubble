@@ -12,11 +12,9 @@ function xhrAdatpter(config){
       if(!request || (request.readyState !== 4&&!xDomain)){
         return;
       }
-
       if(request.status === 0 && !(request.responseURL && request.responseURL.indexOf("file:") === 0)){
         return;
       }
-
       var responseData = !config.responseType || config.responseType === "test" ? request.responseText:request.response;
       var response = {
         data:responseData,
@@ -27,7 +25,6 @@ function xhrAdatpter(config){
       settle(resolve,reject,response);
       request = null
     }
-
     request.onerror = function handleError(){
        reject(createError(new Error("Network Error"),config,null,request,null))
        request = null;
@@ -39,6 +36,7 @@ function xhrAdatpter(config){
     if(config.withCredentials) {
       request.withCredentials = true;
     }
+    request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     if(config.responseType) {
       try {
         request.responseType = config.responseType;

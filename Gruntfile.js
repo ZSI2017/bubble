@@ -17,6 +17,8 @@ module.exports = function(grunt) {
           'src/_isNumeric.js',
           'src/_isNumber.js',
           'src/_isDate.js',
+          'src/_merge.js',
+          'src/_ajax.js',
           'src/_outro.js'
         ],
         dest: 'dist/<%= pkg.name.replace(".js", "") %>.js'
