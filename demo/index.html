@@ -26,8 +26,29 @@
     <script>
       /* begin demo script */
 
-      var n = Bubble();
-      console.log(Bubble.format);
+      var contain = be.format(
+         `字符串拼接的时候使用{0}，\
+           {1}自定义拼接字符串`,
+           "format",
+           "就可以"
+        )
+     console.log(contain);
+
+
+    console.log(Bubble.isNumeric("22"));  // true；
+    console.log(Bubble.isNumeric(22))   // true;)
+
+
+    console.log(Bubble.type(22))  // true
+    console.log(Bubble.type("22"))   // true
+    console.log(Bubble.type([]))     // true
+    console.log(Bubble.type(null))    //true
+
+
+
+
+
+
 
       /* end demo script */
     </script>
