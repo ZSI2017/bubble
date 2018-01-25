@@ -12,10 +12,12 @@ module.exports = function(grunt) {
         src: [
           'src/_intro.js',
           'src/main.js',
+          'src/_dom.js',
           'src/format.js',
           'src/_typeof.js',
           'src/_isNumeric.js',
           'src/_isNumber.js',
+          'src/_isArray.js',
           'src/_isDate.js',
           'src/_merge.js',
           'src/_ajax.js',

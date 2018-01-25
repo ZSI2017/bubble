@@ -11,7 +11,8 @@
     </style>
   </head>
   <body>
-    <h1>Bubble demo</h1>
+    <h1 class="title" id="h1-id">Bubble demo</h1>
+
 
     <!-- begin demo markup -->
 
@@ -53,8 +54,15 @@
     console.log(be.merge({a:1,b:2},{a:2,c:3},{d:1}));
 
     // ajax test
-    console.log(Bubble.axios)
+    // test address  "http://jsonplaceholder.typicode.com/posts"
+    console.log(Bubble.axios.get("http://jsonplaceholder.typicode.com/posts",{params:{userId:1}}).then((data)=>{
+       console.log(JSON.parse(data.data))
+    }))
 
+    // _dom test
+    console.log(be.el('#h1-id'))
+    console.log(be.el('.title'))
+    console.log(be.el('=h1'))
       /* end demo script */
     </script>
   </body>

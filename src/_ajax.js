@@ -16,29 +16,35 @@ let internalAxios = Bubble.axios = {
     }
 };
 internalAxios.request =function request(config) {
+  console.log("into request")
   // Allow for axios('example/url'[,config]) a la fetch API
   if(typeof config === 'string'){
     conifg = Bubble.merge({url:arguments[0]},arguments[1]);
   };
-  config = Bubble.merge(this.defaultAjaxConfig,{methods:'get'},config);
-  var promise = Promise.resolve(config);
-  promise = promise.then()
-  return promise;
+  config = Bubble.merge(internalAxios.defaultAjaxConfig,{methods:'get'},config);
 
+  // var promise = Promise.resolve(config);
+  // promise = promise.then(xhrAdatpter(config));
+  return xhrAdatpter(config);
+};
+
+try{
+  ['delete','get','head','options'].forEach(function(method){
+    internalAxios[method] = function(url,config) {
+      return internalAxios.request(Bubble.merge(config ||{},{
+        method,
+        url
+      }));
+    };
+  });
+}catch(e){
+  console.log("init catch")
+  console.log(e)
 }
 
-['delete','get','head','options'].forEach(function(methods){
-  internalAxios.prototype[methods] = function(url,config) {
-    return this.request(Bubble.merge(config ||{},{
-      method,
-      url
-    }));
-  };
-});
-
 ['post','put','patch'].forEach(function(method){
-  internalAxios.prototype[method] = function(url,data,config) {
-    return this.request(Bubble.merge(config || {},{
+  internalAxios[method] = function(url,data,config) {
+    return internalAxios.request(Bubble.merge(config || {},{
       method,
       url,
       data
@@ -48,7 +54,7 @@ internalAxios.request =function request(config) {
 
 function xhrAdatpter(config){
   return new Promise(function dispatchXhrRequest(resolve,reject){
-    config = Bubble.merge({},defaultAjaxConfig,config);
+    config = Bubble.merge({},internalAxios.defaultAjaxConfig,config);
     var requestData = config.data;
     var requestHeaders = config.headers;
     var request = new XMLHttpRequest();
@@ -64,6 +70,7 @@ function xhrAdatpter(config){
         return;
       }
       var responseData = !config.responseType || config.responseType === "test" ? request.responseText:request.response;
+      var responseHeaders = null;
       var response = {
         data:responseData,
         status:request.status === 1223 ?204:request.status,
@@ -110,16 +117,18 @@ function xhrAdatpter(config){
 }
 
 function settle(resolve,reject,response){
-  var validateStatus = response.config.validateStatus;
-  if(!response.status || ! !validateStatus || validateStatus(response.status)) {
-    resolve(response);
-  }else {
-      reject(createError(new Error(response.status),response.config,null,response.request,response))
-  }
+  resolve(response);
+  // var validateStatus = response.config.validateStatus;
+  // if(!response.status || ! !validateStatus || validateStatus(response.status)) {
+  //     resolve(response);
+  // }else {
+  //     reject(createError(new Error(response.status),response.config,null,response.request,response))
+  // }
 }
 
 function buildURL(url,params,paramsSerizlizer){
-  if(!params) return;
+  console.log("into build URL");
+  if(!params) return url;
   var sericalizedParams;
   if(paramsSerizlizer) {
     sericalizedParams = paramsSerizlizer(params);
@@ -132,6 +141,7 @@ function buildURL(url,params,paramsSerizlizer){
           if(val === null || typeof val === "undefined"){
             return;
           }
+          console.log(Bubble)
           if(Bubble.isArray(val)){
             key = key +'[]';
           }else {
@@ -154,6 +164,7 @@ function buildURL(url,params,paramsSerizlizer){
     url += (url.indexOf('?') === -1?'?':'&') + sericalizedParams;
   }
   return url;
+  console.log("url "+url)
 }
 
 function encode(val) {

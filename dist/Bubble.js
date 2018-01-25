@@ -28,6 +28,24 @@ var Bubble = function() {
 };
 
 
+/*! Salt.js DOM Selector Lib. By @james2doyle */
+/*  简单的都没选择器  */
+Bubble.el= function(selector, context, undefined) {
+  // an object containing the matching keys and native get commands
+  var matches = {
+    '#': 'getElementById',
+    '.': 'getElementsByClassName',
+    '@': 'getElementsByName',
+    '=': 'getElementsByTagName',
+    '*': 'querySelectorAll'
+  }[selector[0]]; // you can treat a string as an array of characters
+  // now pass the selector without the key/first character
+  var el = (((context === undefined) ? document: context)[matches](selector.slice(1)));
+  // if there is one element than return the 0 element
+  return ((el.length < 2) ? el[0]: el);
+};
+
+
 // 渲染html 模板
 // 第一个参数是   传入的字符串，后面的参数对应的{0-10}，分别表示传入的变量。
 Bubble.format = function() {
@@ -75,6 +93,12 @@ Bubble.isNumber = function(o){
 }
 
 
+// 数组精准匹配
+Bubble.isArray= function(arr){
+  return arr != null && typeof arr === "object" && 'splice' in arr && 'join' in arr;
+}
+
+
 Bubble.isDate = function(o) {
   return {}.toString.call(0) === "[object Date]" && o.toString() !== 'Invalid Date'
 }
@@ -115,29 +139,35 @@ let internalAxios = Bubble.axios = {
     }
 };
 internalAxios.request =function request(config) {
+  console.log("into request")
   // Allow for axios('example/url'[,config]) a la fetch API
   if(typeof config === 'string'){
     conifg = Bubble.merge({url:arguments[0]},arguments[1]);
   };
-  config = Bubble.merge(this.defaultAjaxConfig,{methods:'get'},config);
-  var promise = Promise.resolve(config);
-  promise = promise.then()
-  return promise;
+  config = Bubble.merge(internalAxios.defaultAjaxConfig,{methods:'get'},config);
 
+  // var promise = Promise.resolve(config);
+  // promise = promise.then(xhrAdatpter(config));
+  return xhrAdatpter(config);
+};
+
+try{
+  ['delete','get','head','options'].forEach(function(method){
+    internalAxios[method] = function(url,config) {
+      return internalAxios.request(Bubble.merge(config ||{},{
+        method,
+        url
+      }));
+    };
+  });
+}catch(e){
+  console.log("init catch")
+  console.log(e)
 }
 
-['delete','get','head','options'].forEach(function(methods){
-  internalAxios.prototype[methods] = function(url,config) {
-    return this.request(Bubble.merge(config ||{},{
-      method,
-      url
-    }));
-  };
-});
-
 ['post','put','patch'].forEach(function(method){
-  internalAxios.prototype[method] = function(url,data,config) {
-    return this.request(Bubble.merge(config || {},{
+  internalAxios[method] = function(url,data,config) {
+    return internalAxios.request(Bubble.merge(config || {},{
       method,
       url,
       data
@@ -147,7 +177,7 @@ internalAxios.request =function request(config) {
 
 function xhrAdatpter(config){
   return new Promise(function dispatchXhrRequest(resolve,reject){
-    config = Bubble.merge({},defaultAjaxConfig,config);
+    config = Bubble.merge({},internalAxios.defaultAjaxConfig,config);
     var requestData = config.data;
     var requestHeaders = config.headers;
     var request = new XMLHttpRequest();
@@ -163,6 +193,7 @@ function xhrAdatpter(config){
         return;
       }
       var responseData = !config.responseType || config.responseType === "test" ? request.responseText:request.response;
+      var responseHeaders = null;
       var response = {
         data:responseData,
         status:request.status === 1223 ?204:request.status,
@@ -209,16 +240,18 @@ function xhrAdatpter(config){
 }
 
 function settle(resolve,reject,response){
-  var validateStatus = response.config.validateStatus;
-  if(!response.status || ! !validateStatus || validateStatus(response.status)) {
-    resolve(response);
-  }else {
-      reject(createError(new Error(response.status),response.config,null,response.request,response))
-  }
+  resolve(response);
+  // var validateStatus = response.config.validateStatus;
+  // if(!response.status || ! !validateStatus || validateStatus(response.status)) {
+  //     resolve(response);
+  // }else {
+  //     reject(createError(new Error(response.status),response.config,null,response.request,response))
+  // }
 }
 
 function buildURL(url,params,paramsSerizlizer){
-  if(!params) return;
+  console.log("into build URL");
+  if(!params) return url;
   var sericalizedParams;
   if(paramsSerizlizer) {
     sericalizedParams = paramsSerizlizer(params);
@@ -231,6 +264,7 @@ function buildURL(url,params,paramsSerizlizer){
           if(val === null || typeof val === "undefined"){
             return;
           }
+          console.log(Bubble)
           if(Bubble.isArray(val)){
             key = key +'[]';
           }else {
@@ -239,7 +273,7 @@ function buildURL(url,params,paramsSerizlizer){
           val.forEach(function(item,index){
             if(Bubble.isDate(item)){
               item = item.toISOString();
-            }else if(typeof item ==== "object"&&item !== null){
+            }else if(typeof item === "object"&&item !== null){
               item = JSON.stringify(item)
             }
             parts.push(encode(key) + '='+encode(item))
@@ -253,6 +287,7 @@ function buildURL(url,params,paramsSerizlizer){
     url += (url.indexOf('?') === -1?'?':'&') + sericalizedParams;
   }
   return url;
+  console.log("url "+url)
 }
 
 function encode(val) {
