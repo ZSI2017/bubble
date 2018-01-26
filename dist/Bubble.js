@@ -104,6 +104,49 @@ Bubble.isDate = function(o) {
 }
 
 
+/*
+ *  兼容  自定义实现 Object.keys方法  方法，无法遍历名为 valueOf, toString 的属性名
+ */
+Bubble.keys = function(obj) {
+  var a = [];
+  for(a[a.length] in obj);
+  return a;
+}
+
+
+/* 移除 数组 或对象中的某个值。中对应的项 */
+
+Bubble.remove = function(target,item){
+  if(target === null || typeof target === "undefined") return
+  if(typeof target !== "object") {
+    target = [target];
+  }
+  if(this.isArray(target)){
+    var index = Array.prototype.indexOf.call(target,item);
+    if(index > -1) {
+      return target.splice(index,1);
+    }
+  }else{
+    for(var key in target) {
+      if(Object.prototype.hasOwnProperty.call(target,key)){
+        if(key === item){
+          delete target[key]
+        }
+      }
+    }
+    return target;
+  }
+}
+// def(arrayProto, '$remove', function $remove(item) {
+//   /* istanbul ignore if */
+//   if (!this.length) return;
+//   var index = indexOf(this, item);
+//   if (index > -1) {
+//     return this.splice(index, 1);
+//   }
+// });
+
+
 // 多个对象 的合并方法
 Bubble.merge =  function(target) {
   for (let i = 1, j = arguments.length; i < j; i++) {

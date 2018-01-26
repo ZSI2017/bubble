@@ -19,6 +19,8 @@ module.exports = function(grunt) {
           'src/_isNumber.js',
           'src/_isArray.js',
           'src/_isDate.js',
+          'src/_key.js',
+          'src/_remove.js',
           'src/_merge.js',
           'src/_ajax.js',
           'src/_outro.js'
