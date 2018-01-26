@@ -124,6 +124,7 @@ Bubble.remove = function(target,item){
   if(this.isArray(target)){
     var index = Array.prototype.indexOf.call(target,item);
     if(index > -1) {
+      // 该删除操作，改变了原数组，返回被删除的项。
       return target.splice(index,1);
     }
   }else{
@@ -137,14 +138,6 @@ Bubble.remove = function(target,item){
     return target;
   }
 }
-// def(arrayProto, '$remove', function $remove(item) {
-//   /* istanbul ignore if */
-//   if (!this.length) return;
-//   var index = indexOf(this, item);
-//   if (index > -1) {
-//     return this.splice(index, 1);
-//   }
-// });
 
 
 // 多个对象 的合并方法
