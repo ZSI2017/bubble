@@ -232,7 +232,7 @@ void function event(){
 
     fn.unbind = function(type,callback,useCapture) {
       try{
-        removeEvent(this,type,callback,useCapture);
+        removeEvent(el,type,callback,useCapture);
         return this;
       }catch(e) {
         console.error(e)
@@ -241,7 +241,7 @@ void function event(){
 
     fn.dispatch = function(el,type,args,event) {
       try{
-        dispatchEvent(this,type,args,event)
+        dispatchEvent(el,type,args,event)
         return this;
       }catch(e) {
         console.error(e);
@@ -268,7 +268,6 @@ let internalAxios = Bubble.axios = {
     }
 };
 internalAxios.request =function request(config) {
-  console.log("into request")
   // Allow for axios('example/url'[,config]) a la fetch API
   if(typeof config === 'string'){
     conifg = Bubble.merge({url:arguments[0]},arguments[1]);
@@ -290,7 +289,6 @@ try{
     };
   });
 }catch(e){
-  console.log("init catch")
   console.log(e)
 }
 
@@ -379,7 +377,6 @@ function settle(resolve,reject,response){
 }
 
 function buildURL(url,params,paramsSerizlizer){
-  console.log("into build URL");
   if(!params) return url;
   var sericalizedParams;
   if(paramsSerizlizer) {
@@ -393,7 +390,6 @@ function buildURL(url,params,paramsSerizlizer){
           if(val === null || typeof val === "undefined"){
             return;
           }
-          console.log(Bubble)
           if(Bubble.isArray(val)){
             key = key +'[]';
           }else {
@@ -416,7 +412,6 @@ function buildURL(url,params,paramsSerizlizer){
     url += (url.indexOf('?') === -1?'?':'&') + sericalizedParams;
   }
   return url;
-  console.log("url "+url)
 }
 
 function encode(val) {

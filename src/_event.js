@@ -57,7 +57,7 @@ void function event(){
 
     fn.unbind = function(type,callback,useCapture) {
       try{
-        removeEvent(this,type,callback,useCapture);
+        removeEvent(el,type,callback,useCapture);
         return this;
       }catch(e) {
         console.error(e)
@@ -66,7 +66,7 @@ void function event(){
 
     fn.dispatch = function(el,type,args,event) {
       try{
-        dispatchEvent(this,type,args,event)
+        dispatchEvent(el,type,args,event)
         return this;
       }catch(e) {
         console.error(e);

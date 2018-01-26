@@ -29,7 +29,7 @@
     <script>
       /* begin demo script */
 
-      be.clearLog();
+      // be.clearLog();
 
       var contain = be.format(
          `字符串拼接的时候使用{0}，\
@@ -80,6 +80,8 @@
    be.bind(be.el("#btn-test"),"click",function(){
      alert("I am clicked")
    })
+
+   be.dispatch(be.el("#btn-test"),"click",{args:"111111"})
       /* end demo script */
     </script>
   </body>
