@@ -1,6 +1,6 @@
 /* 事件绑定 ，删除  主动触发  */
-void function event(Bubble.prototype){
-  var fn = Bubble.prototype;
+void function event(){
+   var fn = Bubble;
     /**
      *
      *  @method addEvent
@@ -17,7 +17,7 @@ void function event(Bubble.prototype){
       }
     }
     /* 移除事件  */
-    funcion removeEvent(el,type,callback,useCapture) {
+    function removeEvent(el,type,callback,useCapture) {
       if(el.dispatchEvent) {
         el.removeEventListener(type,callback,!!useCapture)
       }else {
@@ -46,16 +46,16 @@ void function event(Bubble.prototype){
       }
     }
 
-    fn.bind = function(type,callback,useCapture){
+    fn.bind = function(el,type,callback,useCapture){
       try{
-        addEvent(this,type,callback,useCapture);
+        addEvent(el,type,callback,useCapture);
         return this;
       }catch(e) {
         console.error(e)
       }
     }
 
-    fn.unbind = funcion(type,callback,useCapture) {
+    fn.unbind = function(type,callback,useCapture) {
       try{
         removeEvent(this,type,callback,useCapture);
         return this;

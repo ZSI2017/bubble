@@ -22,6 +22,8 @@ module.exports = function(grunt) {
           'src/_key.js',
           'src/_remove.js',
           'src/_merge.js',
+          'src/._clearLog.js',
+          'src/_event.js',
           'src/_ajax.js',
           'src/_outro.js'
         ],

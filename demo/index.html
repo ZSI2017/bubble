@@ -13,19 +13,23 @@
   <body>
     <h1 class="title" id="h1-id">Bubble demo</h1>
 
+    <button id="btn-test" type="button" name="button"> bubble event test</button>
+
 
     <!-- begin demo markup -->
 
     <!-- end demo markup -->
 
-    <p>See the <a href="http://liqi.github.io/Bubble">project homepage</a>.
-    <p>Check out the <a href="https://github.com/liqi/Bubble">project repo</a>.
+    <p>See the <a href="http://ZSI2017.github.io/Bubble">project homepage</a>.
+    <p>Check out the <a href="https://github.com/ZSI2017/Bubble">project repo</a>.
     <p>Copyright 2018 liqi</p>
 
     <script src="./../dist/Bubble.js"></script>
 
     <script>
       /* begin demo script */
+
+      be.clearLog();
 
       var contain = be.format(
          `字符串拼接的时候使用{0}，\
@@ -71,6 +75,11 @@
     console.log(be.keys(obj))
 
 
+    // 点击事件测试
+   console.log(be.unbind)
+   be.bind(be.el("#btn-test"),"click",function(){
+     alert("I am clicked")
+   })
       /* end demo script */
     </script>
   </body>
