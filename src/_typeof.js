@@ -8,11 +8,11 @@ var class2type = {
 
 "Boolean,Number,String,Function,Array,Date,RegExp,Window,Document,Arguments,NodeList,Null".split(",").forEach(function(name,idx){
   class2type["[object "+name+"]"] = name.toLowerCase();
-})
+});
 
 Bubble.type=function(obj) {
   return obj === void 0 ?
-                "":obj == null?
+                "":obj === null?
                 String(obj) :
-                class2type[toString.call(obj)] || "object"
-}
+                class2type[toString.call(obj)] || "object";
+};
