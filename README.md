@@ -57,9 +57,54 @@ Bubble.format(
   Bubble.type([])  === "array"     // true
   Bubble.type(null)  === "null"    //true
   ...
+```
 
+### [dom 选择器](./src/_dom.js)
+```
+Bubble.el('#h1-id')
+Bubblebe.el('.title')
+Bubble.el('=h1')
+
+/*
+   # -- id
+   . --- class
+   @ --- name
+   = ---- TagName
+   * ----- querySelectorAll
+  */
+```
+
+### [event 事件操作](./src/_event.js)
+ ```
+  // 绑定事件
+   Bubble.bind(Bubble.el("#btn-test"),"click",function(){
+         console.log("i am clicked")
+     })
+
+  // 主动触发事件
+  Bubble.dispatch(Bubble.el("#btn-test"),"click",{args:"1111"})
+
+  // 接触事件（不能传入匿名函数，后面改进）
+  Bubble.removeEvent(Bubble.el("#btn-test"),"click",fun)
+
+ ```
+
+ ### [自定义的keys方法](./src/_key.js)
+```
+   //自定义的遍历对象属性的方法，利用 for..in..  返回包含所有可枚举属性([[Enumerable]]特性设置为true)的字符串数组
+
+   Bubble.keys(obj)
+```
+
+### [ 删除属性](./src/_remove.js)
+```
+   var arr = [1,2,3],
+       obj = {1:'1',2:"2"};
+  Bubble.remove(arr,2); //返回删除项
+  Bubble.remove(obj,1)  // 返回最后的结果
 
 ```
+
 
 
 ## to do list
@@ -70,6 +115,7 @@ Bubble.format(
   - Events 事件封装
   - virtual  dom
   - router 跳转
+  - 加入单元测试
 
 
 ## Installation

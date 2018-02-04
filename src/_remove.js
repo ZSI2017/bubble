@@ -14,7 +14,7 @@ Bubble.remove = function(target,item){
   }else{
     for(var key in target) {
       if(Object.prototype.hasOwnProperty.call(target,key)){
-        if(key === item){
+        if(key === item.toString()){
           delete target[key]
         }
       }
