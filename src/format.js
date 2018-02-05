@@ -11,3 +11,7 @@ Bubble.format = function() {
  }
  return str;
 };
+// var reg = /\{'+(i - 1)+'\\}/
+function format(str,object) {
+
+}
