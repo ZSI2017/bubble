@@ -48,7 +48,7 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['dist/Bubble.js'],
+      files: ['dist/bubble-less.js'],
       options: {
         globals: {
           Bubble:true,
@@ -56,7 +56,8 @@ module.exports = function(grunt) {
           module: true,
           window:true,
           document: true,
-        },
+        },'
+        '
         jshintrc: '.jshintrc'
       }
     },

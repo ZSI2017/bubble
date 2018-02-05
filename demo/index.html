@@ -91,6 +91,15 @@
     }
     console.log(be.keys(obj))
 
+/**
+ * format 字符串拼接方法
+ *  三种用法
+ */
+
+  console.log(be.format("hello string from #{1}","china"))
+  console.log(be.format("hello string from #{name}",{name:"china"}))
+  console.log(be.format("hello string from \\#{china}"))
+
 
     // 点击事件测试
    console.log(be.unbind)
