@@ -1,5 +1,6 @@
 /*! Salt.js DOM Selector Lib. By @james2doyle */
 /*  简单的都没选择器  */
+"use strict";
 Bubble.el= function(selector, context, undefined) {
   // an object containing the matching keys and native get commands
   var matches = {

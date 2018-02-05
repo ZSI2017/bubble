@@ -1,6 +1,6 @@
 {
-  "name": "Bubble",
-  "version": "0.0.0",
+  "name": "bubble-less",
+  "version": "0.0.3",
   "main": "dist/Bubble.min.js",
   "description": "a simple JavaScript Framework",
   "repository": {

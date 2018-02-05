@@ -23,6 +23,7 @@ module.exports = function(grunt) {
           'src/_remove.js',
           'src/_merge.js',
           'src/._clearLog.js',
+          'src/._cModel.js',
           'src/_event.js',
           'src/_ajax.js',
           'src/_outro.js'
@@ -50,10 +51,11 @@ module.exports = function(grunt) {
       files: ['dist/Bubble.js'],
       options: {
         globals: {
+          Bubble:true,
           console: true,
           module: true,
           window:true,
-          document: true
+          document: true,
         },
         jshintrc: '.jshintrc'
       }
