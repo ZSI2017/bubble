@@ -5,8 +5,12 @@ Bubble.merge =  function(target) {
     for (let prop in source) {
       if (source.hasOwnProperty(prop)) {
         let value = source[prop];
-        if (value !== undefined) {
-          target[prop] = value;
+        if(typeof value === "object" ){
+          target[prop] = Bubble.merge(target[prop]||{},value)
+        }else {
+          if (value !== undefined) {
+            target[prop] = value;
+          }
         }
       }
     }

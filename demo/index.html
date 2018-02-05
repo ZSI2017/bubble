@@ -54,9 +54,26 @@
     console.log(be.isNumber(22));     // true
 
 
+    console.log("-------------------");
     console.log({a:1,b:2},{a:2,c:3},{d:1})
-    console.log(be.merge({a:1,b:2},{a:2,c:3},{d:1}));
-
+    console.log(be.merge({a:1,b:{b1:1}},{a:2,c:3},{b:{b1:2},d:1}));
+    let a = {
+       title:"饼图",
+       textStyle:{
+          color:"fffff",
+          fontWeight:"2222"
+       },
+       x:"center",
+       y:"center"
+    }
+    let b = {
+      title:"Pie",
+      textStyle:{
+        color:"#ccc"
+      }
+    }
+    console.log(be.merge(a,b));
+    console.log("-------------------")
     // ajax test
     // test address  "http://jsonplaceholder.typicode.com/posts"
     console.log(Bubble.axios.get("http://jsonplaceholder.typicode.com/posts",{params:{userId:1}}).then((data)=>{

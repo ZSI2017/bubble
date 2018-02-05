@@ -147,8 +147,12 @@ Bubble.merge =  function(target) {
     for (let prop in source) {
       if (source.hasOwnProperty(prop)) {
         let value = source[prop];
-        if (value !== undefined) {
-          target[prop] = value;
+        if(typeof value === "object" ){
+          target[prop] = Bubble.merge(target[prop]||{},value)
+        }else {
+          if (value !== undefined) {
+            target[prop] = value;
+          }
         }
       }
     }
@@ -268,6 +272,7 @@ let internalAxios = Bubble.axios = {
     }
 };
 internalAxios.request =function request(config) {
+  console.log("into request")
   // Allow for axios('example/url'[,config]) a la fetch API
   if(typeof config === 'string'){
     conifg = Bubble.merge({url:arguments[0]},arguments[1]);
@@ -289,6 +294,7 @@ try{
     };
   });
 }catch(e){
+  console.log("init catch")
   console.log(e)
 }
 
@@ -377,6 +383,7 @@ function settle(resolve,reject,response){
 }
 
 function buildURL(url,params,paramsSerizlizer){
+  console.log("into build URL");
   if(!params) return url;
   var sericalizedParams;
   if(paramsSerizlizer) {
@@ -390,6 +397,7 @@ function buildURL(url,params,paramsSerizlizer){
           if(val === null || typeof val === "undefined"){
             return;
           }
+          console.log(Bubble)
           if(Bubble.isArray(val)){
             key = key +'[]';
           }else {
@@ -412,6 +420,7 @@ function buildURL(url,params,paramsSerizlizer){
     url += (url.indexOf('?') === -1?'?':'&') + sericalizedParams;
   }
   return url;
+  console.log("url "+url)
 }
 
 function encode(val) {
