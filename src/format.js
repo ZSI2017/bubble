@@ -13,5 +13,16 @@ Bubble.format = function() {
 };
 // var reg = /\{'+(i - 1)+'\\}/
 function format(str,object) {
+  var array = Array.prototype.slice.call(arguments,1);
+  return str.replace(/\\?\#{([^{}]+)\}/gm,function(match,name){
+    if(match.charAt(0) == '\\')
+      return match.slice(1);
+    var index = Number(name)
+    if(index>=0)
+      return array[index];
+    if(object && object[name] !== void 0)
+      return object[name];
+    return '';
+  })
 
 }
