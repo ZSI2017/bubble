@@ -214,10 +214,6 @@ Bubble.render = function(tpl) {
 void function(){
   var fn = Bubble;
   fn.tokenize = tokenize;
-
-
-
-
 /**
  *  拆分模板字符串
  */
@@ -235,7 +231,7 @@ function tokenize(str) {
           type:"text"
         })
         // 改变str字符串本身
-        str = str.slice(idnex +openTag.length)
+        str = str.slice(index +openTag.length)
         if(str) {
           index = str.indexOf(closeTag)
           var value = str.slice(0,index)
@@ -247,11 +243,9 @@ function tokenize(str) {
           // 改变 str 字符串本身
           str = str.slice(index+closeTag.length)
         }
-      }white(str.length)
+      }while(str.length)
       return ret
 }
-
-
 
 
 }()

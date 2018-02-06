@@ -1,5 +1,6 @@
 /*
  *   渲染引擎， 简单的mvvm 框架
+ *   <<JavaScript 框架设计>> 前端模板引擎
  */
 
 Bubble.render = function(tpl) {
@@ -9,11 +10,8 @@ Bubble.render = function(tpl) {
 
 void function(){
   var fn = Bubble;
-  fn.tokenize = tokenize;
-
-
-
-
+  fn.tokenize = tokeniz
+  fn.render = render
 /**
  *  拆分模板字符串
  */
@@ -31,7 +29,7 @@ function tokenize(str) {
           type:"text"
         })
         // 改变str字符串本身
-        str = str.slice(idnex +openTag.length)
+        str = str.slice(index +openTag.length)
         if(str) {
           index = str.indexOf(closeTag)
           var value = str.slice(0,index)
@@ -43,11 +41,22 @@ function tokenize(str) {
           // 改变 str 字符串本身
           str = str.slice(index+closeTag.length)
         }
-      }white(str.length)
+      }while(str.length)
       return ret
 }
 
-
+function render(str) {
+  var tokens = tokenize(str)
+  var ret = []
+  for(var i =0,token;token = tokens[i++];){
+    if(token.type === "text") {
+      ret.push('"'+token.expr + '"')
+    }else {
+      ret.push(token.expr)
+    }
+  }
+  console.log("return "+ret.join('+'));
+}
 
 
 }()
