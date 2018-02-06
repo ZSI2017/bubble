@@ -24,6 +24,7 @@ module.exports = function(grunt) {
           'src/_merge.js',
           'src/._clearLog.js',
           'src/._cModel.js',
+          'src/_.render.js',
           'src/_event.js',
           'src/_ajax.js',
           'src/_outro.js'
@@ -55,9 +56,8 @@ module.exports = function(grunt) {
           console: true,
           module: true,
           window:true,
-          document: true,
-        },'
-        '
+          document: true
+        },
         jshintrc: '.jshintrc'
       }
     },
