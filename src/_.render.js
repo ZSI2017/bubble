@@ -34,10 +34,19 @@ function tokenize(str) {
           index = str.indexOf(closeTag)
           var value = str.slice(0,index)
           // 抽取 {{与}} 中间的动态内容
-          ret.push({
-            expr:value.trim(),
-            type:"js"
-          })
+          // 添加判断 for 或者 if 循环语句
+          value = value.trim();
+          if(/^(if|for|})/.test(value)){
+            ret.push({
+              expr:value,
+              type:'logic'
+            })
+          }else {
+            ret.push({
+              expr:value,
+              type:"js"
+            })
+          }
           // 改变 str 字符串本身
           str = str.slice(index+closeTag.length)
         }
@@ -57,6 +66,10 @@ function render(str) {
   }
   console.log("return "+ret.join('+'));
 }
+
+
+
+
 
 
 }()
