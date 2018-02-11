@@ -271,51 +271,74 @@ void function () {
 	// 	console.log("return " + ret.join('+'));
 	// }
 
+  // function addPrefix(str) {
+  //   var rident = /[$a-zA-Z][$a-zA-Z0-9_]*/g
+  //   var rproperty = /\.\s*[\w\.\$]/g
+  //   var rfill = /\?\?\d+/g
+  //   var number = 1
+  //   var stringPool = {}
+  //   // 通过dig 和 fill仿佛 ，将子级属性变成 ？？12 这样的字符串
+  //   // stringPool 不保留子级改变前的值
+  //   function dig(a) {
+  //     var key = "??"+number++
+  //     stringPool[key] = a
+  //     return key
+  //   }
+  //   function fill(a) {
+  //     return stringPool[a]
+  //   }
+  //   var js = str.replace(rproperty,dig)  // 转换子级属性
+  //   js = js.replace(rident,function(a){
+  //     return 'data.'+a
+  //   })
+  //   return js.replace(rfill,fill);
+  // }
+
   function addPrefix(str) {
-    var rident = /[$a-zA-Z][$a-zA-Z0-9_]*/g
-    var rproperty = /\.\s*[\w\.\$]/g
-    var rfill = /\?\?\d+/g
-    var number = 1
+    var rguide = /(^|[^\w\u00c0-\uFFFF_])(@|##)(?=[]\$\w)/g
+    return str.replace(rguide,'$1data.')
+  }
+
+  function render(str) {
+		var quote = JSON.stringify
     var stringPool = {}
-    // 通过dig 和 fill仿佛 ，将子级属性变成 ？？12 这样的字符串
-    // stringPool 不保留子级改变前的值
-    function dig(a) {
-      var key = "??"+number++
-      stringPool[key] = a
-      return key
+    var tokens = tokenize(str)
+    var ret = ['var _data_= [];']
+    for(var i = 0,token;token = tokens[i++];) {
+      if(token.type === "text") {
+        ret.push(addView(quote(token.expr)))
+      }else if(token.type === 'logic') {
+        ret.push(addPrefix(token.expr))
+      }else {
+        ret.push(addView(addPrefix(token.expr)))
+      }
     }
-    function fill(a) {
-      return stringPool[a]
-    }
-    var js = str.replace(rproperty,dig)  // 转换子级属性
-    js = js.replace(rident,function(a){
-      return 'data.'+a
-    })
-    return js.replace(rfill,fill);
+    ret.push('return _data_.join("")')
+    return new Function("data",ret.join('\n'))
   }
 
   function addView(s) {
     return '_data_.push('+s+')'
   }
 
-  function render(str) {
-    // stringPool = {}
-    var quote = JSON.stringify;
-    var tokens = tokenize(str)
-    var ret = ['var _data_ = []']
-    tokens.forEach(function(token){
-      if(token.type === 'text') {
-        ret.push(addView(quote(token.expr)))
-      }else if(token.type === 'logic') {
-        //  添加 对象名前缀
-        ret.push(addPrefix(token.expr))
-      }else {
-        ret.push(addView(addPrefix(token.expr)))
-      }
-    })
-    ret.push("return _data_.join('')")
-    console.log(ret.join('\n'))
-  }
+  // function render(str) {
+  //   // stringPool = {}
+  //   var quote = JSON.stringify;
+  //   var tokens = tokenize(str)
+  //   var ret = ['var _data_ = []']
+  //   tokens.forEach(function(token){
+  //     if(token.type === 'text') {
+  //       ret.push(addView(quote(token.expr)))
+  //     }else if(token.type === 'logic') {
+  //       //  添加 对象名前缀
+  //       ret.push(addPrefix(token.expr))
+  //     }else {
+  //       ret.push(addView(addPrefix(token.expr)))
+  //     }
+  //   })
+  //   ret.push("return _data_.join('')")
+  //   console.log(ret.join('\n'))
+  // }
 }()
 
 

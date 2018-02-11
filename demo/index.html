@@ -116,7 +116,7 @@
     // var tpl = '你好，我的名字是<%name%>,今年已经<%info.age%>岁了'
    // console.log(be.tokenize(tpl));
    console.log("********   tokenize   *****************")
-     tpl = '你好，我的名字叫<%name%>,今年已经<%info.age%>岁了，喜欢<% for(var i =0,el;el = list[i++];){%><% el %><%} %>'
+     tpl = '你好，我的名字叫<%@name%>,今年已经<%@info.age%>岁了，喜欢<% for(var i =0,el;el = @list[i++];){%><% el %><%} %>'
      console.log(be.render(tpl))
    console.log("********   tokenize   *****************")
 

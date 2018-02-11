@@ -91,12 +91,13 @@ void function () {
   // }
 
   function addPrefix(str) {
-    var rguide = /(^|[^\w\u00c0 = \uFFFF_])(@|##)(?=[]$\w)/g
+    var rguide = /(^|[^\w\u00c0-\uFFFF_])(@|##)(?=[\$\w])/g
     return str.replace(rguide,'$1data.')
   }
 
   function render(str) {
-    stringPool = {}
+		var quote = JSON.stringify
+    var stringPool = {}
     var tokens = tokenize(str)
     var ret = ['var _data_= [];']
     for(var i = 0,token;token = tokens[i++];) {
