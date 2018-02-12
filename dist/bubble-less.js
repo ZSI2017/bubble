@@ -295,7 +295,7 @@ void function () {
   // }
 
   function addPrefix(str) {
-    var rguide = /(^|[^\w\u00c0-\uFFFF_])(@|##)(?=[]\$\w)/g
+    var rguide = /(^|[^\w\u00c0-\uFFFF_])(@|##)(?=[\$\w])/g
     return str.replace(rguide,'$1data.')
   }
 
