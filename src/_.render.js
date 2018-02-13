@@ -94,7 +94,7 @@ void function () {
     var rguide = /(^|[^\w\u00c0-\uFFFF_])(@|##)(?=[\$\w])/g
     return str.replace(rguide,'$1data.')
   }
-
+// taking
   function render(str) {
 		var quote = JSON.stringify
     var stringPool = {}
