@@ -1,6 +1,7 @@
 /*
  *   渲染引擎， 简单的mvvm 框架
  *   <<JavaScript 框架设计>> 前端模板引擎
+ *   02-15 
  */
 
 Bubble.render = function (tpl) {
@@ -53,6 +54,7 @@ void function () {
 		} while (str.length)
 		return ret
 	}
+
 
 	// function render(str) {
 	// 	var tokens = tokenize(str)
