@@ -1,6 +1,8 @@
 /*
  *   渲染引擎， 简单的mvvm 框架
  *   <<JavaScript 框架设计>> 前端模板引擎
+ *   02-15
+ *   02-16
  */
 
 Bubble.render = function (tpl) {
@@ -54,6 +56,7 @@ void function () {
 		return ret
 	}
 
+
 	// function render(str) {
 	// 	var tokens = tokenize(str)
 	// 	var ret = []
@@ -91,12 +94,13 @@ void function () {
   // }
 
   function addPrefix(str) {
-    var rguide = /(^|[^\w\u00c0 = \uFFFF_])(@|##)(?=[]$\w)/g
+    var rguide = /(^|[^\w\u00c0-\uFFFF_])(@|##)(?=[\$\w])/g
     return str.replace(rguide,'$1data.')
   }
-
+// taking
   function render(str) {
-    stringPool = {}
+		var quote = JSON.stringify
+    var stringPool = {}
     var tokens = tokenize(str)
     var ret = ['var _data_= [];']
     for(var i = 0,token;token = tokens[i++];) {
