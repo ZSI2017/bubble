@@ -108,6 +108,22 @@ Bubble.axios.get("http://jsonplaceholder.typicode.com/posts",{params:{userId:1}}
 })
 ```
 
+### [render 模板渲染方法](./src/_.render.js)
+```
+var data = {
+  name:"lq",
+  info:{
+    age:20
+  },
+  list:["苹果","香蕉","橘子"]
+}
+tpl = '你好，我的名字叫<%@name%>,今年已经<%@info.age%>岁了，喜欢<% for(var i =0,el;el = @list[i++];){%><% el %><%} %>'
+var fn = Bubble.render(tpl);
+console.log(fn(data));   // 你好，我的名字叫lq,今年已经20岁了，喜欢苹果香蕉橘子
+
+```
+
+
 ### [ 删除属性](./src/_remove.js)
 ```
    var arr = [1,2,3],
