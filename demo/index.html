@@ -30,16 +30,6 @@
       /* begin demo script */
 
       // be.clearLog();
-
-      var contain = be.format(
-         `字符串拼接的时候使用{0}，\
-           {1\}自定义拼接字符串`,
-           "format",
-           "就可以"
-        )
-     console.log(contain);
-
-
     console.log(Bubble.isNumeric("22"));  // true；
     console.log(Bubble.isNumeric(22))   // true;)
 
@@ -96,7 +86,7 @@
  *  三种用法
  */
 
-  console.log(be.format("hello string from #{1}","china"))
+  console.log(be.format("hello string from #{0}","china"))
   console.log(be.format("hello string from #{name}",{name:"china"}))
   console.log(be.format("hello string from \\#{china}"))
 

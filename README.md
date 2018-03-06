@@ -19,16 +19,11 @@ See the [project homepage](http://ZSI2017.github.io/Bubble).
 
 #### 字符串模板
 ```
-Bubble.format(
-   `字符串拼接的时候使用{0}，\
-     {1}自定义拼接字符串`,
-     "format",
-     "就可以"
-  )
+ 三种方式：
 
-运行结果：
-    // 字符串拼接的时候使用format，就可以自定义拼接字符串`
-
+Bubble.format("hello string from #{0}","china")          //hello string from china
+Bubble.format("hello string from #{name}",{name:"china"})  //hello string from china
+Bubble.format("hello string from \\#{china}")             //hello string from #{china}
 ```
 
 #### 类数字判断
@@ -73,6 +68,16 @@ Bubble.el('=h1')
    * ----- querySelectorAll
   */
 ```
+### [Object merge](./src/_merge.js)
+```
+
+合并多层嵌套对象
+
+be.merge({a:1,b:{b1:1}},{a:2,c:3},{b:{b1:2},d:1});   // {a:2,b:{b1:2},c:3,d:1}
+
+```
+
+
 
 ### [event 事件操作](./src/_event.js)
  ```
@@ -89,11 +94,18 @@ Bubble.el('=h1')
 
  ```
 
- ### [自定义的keys方法](./src/_key.js)
+### [自定义的keys方法](./src/_key.js)
 ```
    //自定义的遍历对象属性的方法，利用 for..in..  返回包含所有可枚举属性([[Enumerable]]特性设置为true)的字符串数组
 
    Bubble.keys(obj)
+```
+
+### [ajax 异步请求](./src/_ajax.js)
+```
+Bubble.axios.get("http://jsonplaceholder.typicode.com/posts",{params:{userId:1}}).then((data)=>{
+   console.log(JSON.parse(data.data))
+})
 ```
 
 ### [ 删除属性](./src/_remove.js)
@@ -108,14 +120,11 @@ Bubble.el('=h1')
 
 
 ## to do list
-  - 移除grunt，选择其他打包工具
   - 常用javascript 方法封装
-  - css 动画技巧 (待定...)
+  - css 动画技巧
   - DOM 操作简单处理
-  - Events 事件封装
   - virtual  dom
   - router 跳转
-  - 加入单元测试
 
 
 ## Installation

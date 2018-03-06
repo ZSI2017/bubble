@@ -3,6 +3,7 @@
  *   <<JavaScript 框架设计>> 前端模板引擎
  *   02-15
  *   02-16
+ * 
  */
 
 Bubble.render = function (tpl) {
