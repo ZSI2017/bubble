@@ -1,12 +1,10 @@
-![logo](_media/icon.svg)
 
-# docsify
 
-> A magical documentation site generator.
+# Bubble
 
-* Simple and lightweight (~12kb gzipped)
-* Multiple themes
-* Not build static html files
+> a simple JavaScript Framework
 
-[GitHub](https://github.com/QingWei-Li/docsify/)
-[Get Started](/README)
+
+
+[GitHub](https://github.com/ZSI2017/bubble/)
+[Get Started](/usage)
