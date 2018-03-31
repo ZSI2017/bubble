@@ -8,7 +8,7 @@
 >a simple JavaScript Framework
 
 
-![气泡](./bubble.jpg)
+
 ## About
 
 
