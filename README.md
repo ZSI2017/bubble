@@ -135,20 +135,20 @@ console.log(fn(data));   // 你好，我的名字叫lq,今年已经20岁了，�
 
 
 ## to do list
-  - 常用javascript 方法封装
-  - css 动画技巧
-  - DOM 操作简单处理
-  - virtual  dom
-  - router 跳转
+  * [ ] 常用javascript 方法封装
+  * [ ] css 动画技巧
+  * [ ] DOM 操作简单处理
+  * [ ] virtual  dom
+  * [ ] router 跳转
 
 
 ## Installation
 
 Using Bower:
-
-  <script src= "./dist/Bubble.js"></script>
-
-Or grab the [source](https://github.com/ZSI2017/Bubble/dist/Bubble.js) ([minified](https://github.com/ZSI2017/Bubble/dist/Bubble.min.js)).
+```
+  <script src= "./dist/bubble-less.js"></script>
+```
+Or grab the [source](https://github.com/ZSI2017/Bubble/dist/bubble-less.js)
 
 ## Usage
 
@@ -158,9 +158,8 @@ Basic usage is as follows:
 
 For advanced usage, see the documentation.
 
-## Documentation
+## [Documentation](https://zsi2017.github.io/bubble/)
 
-Start with `docs/MAIN.md`.
 
 ## Contributing
 
